@@ -4,6 +4,9 @@ import onewire
 import ds18x20
 import dht
 
+from machine import I2C, Pin
+from bmp180 import BMP180
+
 
 # DS18B20 Temperature Sensor
 def read_ds18b20():
@@ -41,3 +44,17 @@ def read_dht11():
     humidity = dht11.humidity()
 
     return float(temperature_c), temperature_f, humidity
+
+
+def read_bmp180():
+
+    bus = I2C(scl=Pin(22), sda=Pin(21), freq=100000)
+    bmp180 = BMP180(bus)
+    bmp180.oversample_sett = 2
+    bmp180.baseline = 101325
+
+    temperature = bmp180.temperature
+    pressure = bmp180.pressure
+    altitude = bmp180.altitude
+
+    return temperature, pressure, altitude
