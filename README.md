@@ -1,6 +1,6 @@
 # TinyPico Temperature To MQTT
 
-A simple project set up for the purpose of testing power consumption of the TinyPico while reading room temperature and humidity and publishing to MQTT
+A simple project set up for the purpose of testing power consumption of the TinyPico while reading room temperature and humidity sensors and publishing to MQTT
 
 # Purpose
 
