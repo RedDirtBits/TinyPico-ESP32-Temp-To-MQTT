@@ -1,6 +1,7 @@
 import utime
 import sensors
 import machine
+import ujson
 
 from boot import NetworkConnection
 from mqtt import mqtt_client
@@ -19,18 +20,34 @@ utime.sleep(3)
 
 # Read from the sensor and store results
 
-temp_c = sensors.read_dht11()[0]
-temp_f = sensors.read_dht11()[1]
-humidity = sensors.read_dht11()[2]
+dht11_temp_c = sensors.read_dht11()[0]
+dht11_temp_f = sensors.read_dht11()[1]
+dht11_humidity = sensors.read_dht11()[2]
+
+bmp180_temp = (sensors.read_bmp180()[0] * 1.8) + 32
+bmp180_pressure = sensors.read_bmp180()[1] * 0.00030
+bmp180_altitude = sensors.read_bmp180()[2] * 3.2808
 
 # Sleep again just to be sure the sensor read completes
 
 utime.sleep(3)
 
-# Take everything and form the MQTT message and publish to the topic
+print('Sending Message...')
 
-mqtt_client('RedDirt/ESP32',
-            'Current Temperature C: {}\nCurrent Temperature F: {}\nHumidity: {}%'.format(temp_c, temp_f, humidity))
+sensor_data = {
+    'DHT11': {
+        'Current Temperature C': str(float(dht11_temp_c)),
+        'Current Temperature F': str(float(dht11_temp_f)),
+        'Current Humidity %': str(float(dht11_humidity))
+    },
+    'BMP180': {
+        'Current Temperature F': bmp180_temp,
+        'Current Atmospheric Pressure inHg': bmp180_pressure,
+        'Current Altitude Ft': bmp180_altitude
+    }
+}
+
+mqtt_client('RedDirt/ESP32', ujson.dumps(sensor_data))
 
 # Yeah, I know, sleep again.
 
