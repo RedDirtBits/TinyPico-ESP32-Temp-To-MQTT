@@ -6,12 +6,12 @@ import dht
 
 from machine import I2C, Pin
 from bmp180 import BMP180
+from bh1750 import BH1750
 
 
-# DS18B20 Temperature Sensor
 def read_ds18b20():
     """
-     Function to read externally connected Temperature sensor
+     Function to read externally connected DS18B20 Temperature sensor
 
     Returns:
         tuple: Temperature in Fahrenheit and Celcius
@@ -33,6 +33,12 @@ def read_ds18b20():
 
 
 def read_dht11():
+    """
+     Function to read externally connected Temperature DHT11 sensor
+
+    Returns:
+        tuple: Temperature in Fahrenheit and Celcius, Humidity
+    """
 
     dht11 = dht.DHT11(machine.Pin(4))
     dht11.measure()
@@ -47,6 +53,14 @@ def read_dht11():
 
 
 def read_bmp180():
+    """
+     Function to read externally connected BMP180 Temperature,
+     Barometric Pressure and Altitude sensor
+
+    Returns:
+        tuple: Temperature in Celcius, Altitude in Meters and,
+        Pressure in Pascals
+    """
 
     bus = I2C(scl=Pin(22), sda=Pin(21), freq=100000)
     bmp180 = BMP180(bus)
