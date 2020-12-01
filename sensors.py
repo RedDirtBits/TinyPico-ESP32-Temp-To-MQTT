@@ -72,3 +72,18 @@ def read_bmp180():
     altitude = bmp180.altitude
 
     return temperature, pressure, altitude
+
+
+def read_bh1750():
+    """
+     Function to read externally connected BH1750 Light Sensor
+
+    Returns:
+        float: Light intensity in lumens
+    """
+
+    bus = I2C(scl=Pin(22), sda=Pin(21), freq=100000)
+
+    s = BH1750(bus)
+
+    return s.luminance(BH1750.ONCE_HIRES_1)
