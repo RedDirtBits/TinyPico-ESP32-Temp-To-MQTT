@@ -27,3 +27,8 @@ As time allows, I would like to do a few more things with each of the variant ES
 3. Flash the final working codebase into the ESP32 firmware itself
 
 I believe there are more power savings to be had from writing the code more effiently and 'baking' it into the ESP32 firmware.
+
+If you would like to see the data being sent, I am currently publishing to [Eclipse Mosquitto](https://test.mosquitto.org) under the topic _RedDirt/ESP32_. The data may or may not be live and could come and go as I continue to develop and test. If I am testing battery endurance you will see reports at regular intervals, typically from every 5 to as much as 15 minutes until the battery dies.
+
+Right now there is zero error handling therefore any number of things could cause the data reports to end, but most likely it will be network interruptions.
+As soon as I am happy with the the sensor reads, I will start writing in the error handling to deal with some of those circumstances.
