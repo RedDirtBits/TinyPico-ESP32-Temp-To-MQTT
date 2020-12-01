@@ -32,8 +32,6 @@ bmp180_altitude = sensors.read_bmp180()[2] * 3.2808
 
 utime.sleep(3)
 
-print('Sending Message...')
-
 sensor_data = {
     'DHT11': {
         'Current Temperature C': str(float(dht11_temp_c)),
@@ -61,9 +59,9 @@ NetworkConnection().wifi_disconnect()
 
 utime.sleep(10)
 
-# The deepsleep time is in microseconds.  Therefore
-# to calculate deepsleep time, multiple the time in seconds you want to wait for the
-# next cycle by 1000.  For example, 15 minutes would be 900 seconds.  A 15 minute
-# deepsleep would be 900 x 1000 or 90000.
+# The deepsleep time is in microseconds.  Therefore, to calculate deepsleep time,
+# multiple the time in seconds you want to wait for the next cycle by 1000.
+# For example, 15 minutes would be 900 seconds.  A 15 minute deepsleep would
+# be 900 x 1000 or 90000.
 
 machine.deepsleep(300000)
