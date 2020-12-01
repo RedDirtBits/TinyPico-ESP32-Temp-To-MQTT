@@ -32,3 +32,5 @@ If you would like to see the data being sent, I am currently publishing to [Ecli
 
 Right now there is zero error handling therefore any number of things could cause the data reports to end, but most likely it will be network interruptions.
 As soon as I am happy with the the sensor reads, I will start writing in the error handling to deal with some of those circumstances.
+
+If you need a pretty darn good MQTT client, check out [MQTT Explorer](http://mqtt-explorer.com/). Works great on Linux.
